@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--&lt;!&ndash;Loop trough books&ndash;&gt;-->
+<!--    <template id="books_template">-->
+<!--        <t t-call="website.layout">-->
+<!--            <title>Book</title>-->
+<!--             <div class="oe_structure"/>-->
+<!--            <div class="oe_structure">-->
+<!--                <div class="container">-->
+<!--                    <t t-foreach="books" t-as="book">-->
+<!--                        <p>-->
+<!--                            <a t-attf-href="/library/{{slug(book)}}"><t t-esc="book.name.name"/></a>-->
+<!--                        </p>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+<!--By the book name in URL show book details-->
+    <template id="book_detail">
+        <t t-call="website.layout">
+            <title>Book_details</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <br/>
+                    <h3><t t-esc="book.name.name"/></h3><br/> <!--can make an editable field with this t-field-->
+                    <h6>Autorius</h6>
+                    <p><t t-esc="book.author"/></p>
+                    <h6>Aprašymas</h6>
+                    <p><t t-esc="book.description"/></p>
+                </div>
+            </div>
+        </t>
+    </template>
+<!--Custom section for book count in /my/home -->
+    <template id="portal_all_books" name="Portal My Home : Books" customize_show="True" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Knygos</t>
+                <t t-set="url" t-value="'/library/books'"/>
+                <t t-set="placeholder_count" t-value="'count_books'"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_library_books" name="Books">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Knygos</t>
+            </t>
+            <t t-if="not books">
+                <p>Here are currently no books available</p>
+            </t>
+            <t t-if="books" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Knyga #</th>
+                        <th>Autorius</th>
+                        <th>Serijos numeris</th>
+                    </tr>
+                </thead>
+                <t t-foreach="books" t-as="book">
+                    <tr>
+                        <td><a t-attf-href="/library/books/{{slug(book)}}"><t t-esc="book.name.name"/></a></td>
+                        <td class="text-right"><span t-field="book.author"/></td>
+                        <td class="text-right"><span t-field="book.book_id"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

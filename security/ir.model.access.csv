@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+library.access_library_book,access_library_book,library.model_library_book,base.group_user,1,1,1,1
+library_access_library_book,Portal User Access to Library Book,library.model_library_book,base.group_portal,1,1,1,1
+library.access_library_book_borrow,access_library_book_borrow,library.model_library_book_borrow,base.group_user,1,1,1,1

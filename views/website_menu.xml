@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="website_library_main" model="website.menu">
+        <field name="name">Biblioteka</field>
+        <field name="url"></field>
+        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>
+        <field name="sequence" type="int">10</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+     <record id="website_library_book" model="website.menu">
+        <field name="name">Knygų sąrašas</field>
+        <field name="url">/library/books</field>
+        <field name="parent_id" ref="website_library_main"/>
+        <field name="sequence" type="int">10</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+    <record id="website_library_book_borrow" model="website.menu">
+        <field name="name">Pasiimtos knygos</field>
+        <field name="url">/calendar/events</field>
+        <field name="parent_id" ref="website_library_main"/>
+        <field name="sequence" type="int">10</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+</odoo>

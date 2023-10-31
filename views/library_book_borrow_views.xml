@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Form-->
+    <record id="view_library_book_borrow_form" model="ir.ui.view">
+        <field name="name">Library book borrow form</field>
+        <field name="model">library.book.borrow</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="to_confirm" states="draft" string="Save" class="oe_highlight"/>
+                    <button type="object" name="to_reject" states="draft" string="Reject" class="oe_highlight"/>
+                    <button type="object" name="to_draft" states="confirmed,rejected" string="Reset"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                            /
+                            <field name="customer_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <separator string="General info"/>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                             <field name="serial_num"/>
+                        </group>
+                        <group>
+                            <separator string="Details"/>
+                            <field name="borrow_date"/>
+                            <field name="return_date"/>
+                            <field name="days"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--Tree-->
+    <record id="view_library_book_borrow_tree" model="ir.ui.view">
+        <field name="name">Library book borrow tree</field>
+        <field name="model">library.book.borrow</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="customer_id"/>
+                 <field name="serial_num"/>
+                <field name="borrow_date"/>
+                <field name="return_date"/>
+                <field name="days"/>
+            </tree>
+        </field>
+    </record>
+    <!--Calendar-->
+    <record id="view_library_book_borrow_calendar" model="ir.ui.view">
+        <field name="name">Library book borrow calendar</field>
+        <field name="model">library.book.borrow</field>
+        <field name="arch" type="xml">
+            <calendar string="Knygų kalendorius" date_start="borrow_date" date_stop="return_date" color="customer_id"
+                      mode="month" quick_add="False">
+                <field name="name" invisible="1" filters="1"/>
+                <field name="customer_id" invisible="1" filters="1"/>
+                <field name="serial_num"/>
+                <field name="borrow_date"/>
+                <field name="return_date"/>
+                <field name="days"/>
+
+            </calendar>
+        </field>
+    </record>
+    <!--Actions-->
+    <record id="action_library_book_borrow" model="ir.actions.act_window">
+        <field name="name">Knygos priskyrimas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">library.book.borrow</field>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
+    <menuitem id="menu_book_borrow"
+              name="Paimtų knygų sąrašas"
+              parent="books"
+              action="action_library_book_borrow"
+    />
+</odoo>
