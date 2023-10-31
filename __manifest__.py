@@ -2,7 +2,6 @@
     "name":"Bibiliotekos Valdymo Sistema",
     "version":"16.0.0.1",
     "author":"Paulius Baksys",
-    "website":"www.timitis.lt",
     "summary":"Blbliotekos valdymas",
     "sequence":"1",
     "depends":["base", "website", "product", "portal"],
